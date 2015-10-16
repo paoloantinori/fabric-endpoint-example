@@ -28,15 +28,32 @@
     
     <modules>
         <module>fabric-endpoint-client</module>
-        <module>fabric-endpoint-consumer</module>
         <module>fabric-endpoint-features</module>
+<!--         <module>fabric-endpoint-consumer</module> -->
+        <module>fabric-endpoint-consumer2</module>
+<!--         <module>fabric-endpoint-consumer2b</module>
+        <module>fabric-endpoint-consumer3</module>
+        <module>fabric-endpoint-consumer4</module>
+        <module>fabric-endpoint-consumer5</module>
+        <module>fabric-endpoint-consumer6</module>
+        <module>fabric-endpoint-consumer7</module>
+        <module>fabric-endpoint-consumer8</module>
+        <module>fabric-endpoint-consumer9</module>
+        <module>fabric-endpoint-consumer10</module>
+        <module>fabric-endpoint-consumer11</module>
+        <module>fabric-endpoint-consumer12</module>
+        <module>fabric-endpoint-consumer13</module>
+        <module>fabric-endpoint-consumer14</module>
+        <module>fabric-endpoint-consumer15</module>
+        <module>fabric-endpoint-consumer16</module> -->
     </modules>
 
     <properties>
-        <camel.version>2.12.0.redhat-610312</camel.version>
-        <fuse.version>7.2.0.redhat-024</fuse.version>
+        <camel.version>2.12.0.redhat-610379</camel.version>
+        <fuse.version>fabric-1.0.0.redhat-379</fuse.version>
         <maven-resources-plugin-version>2.5</maven-resources-plugin-version>
         <build-helper-plugin-version>1.7</build-helper-plugin-version>
+        <fabric8-maven-plugin-version>1.2.0.Beta4</fabric8-maven-plugin-version>
     </properties>
 
 
@@ -74,6 +91,11 @@
                     <version>2.3.7</version>
                     <extensions>true</extensions>
                 </plugin>
+				<plugin>
+					<groupId>io.fabric8</groupId>
+					<artifactId>fabric8-maven-plugin</artifactId>
+					<version>${fabric8-maven-plugin-version}</version>
+				</plugin>
             </plugins>
         </pluginManagement>
     </build>

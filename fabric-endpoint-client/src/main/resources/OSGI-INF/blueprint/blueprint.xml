@@ -29,24 +29,91 @@
     <cm:property-placeholder id="myblueprint.placeholder" persistent-id="com.fusesource.examples.fabricendpoint.client">
         <!-- list some properties for this test -->
         <cm:default-properties>
-            <cm:property name="name" value="client"/>
+            <cm:property name="name" value="p324prfmdc"/>
         </cm:default-properties>
     </cm:property-placeholder>
 
+	<bean id="genRandom" class="org.mrobson.example.GenRandom"/>
 
-    <reference id="zkClient" interface="org.fusesource.fabric.zookeeper.IZKClient" />
+  <reference id="curator" interface="org.apache.curator.framework.CuratorFramework"/>
 
-    <camelContext id="baseCamelContext" xmlns="http://camel.apache.org/schema/blueprint">
-    <propertyPlaceholder location="blueprint:myblueprint.placeholder" id="properties"/>
-        <route id="fabric-client">
-            <from uri="timer://foo"/>
-            <setBody>
-                <simple>${properties:name} said: Hello Cosumer!</simple>
-            </setBody>
-            <log message="${body}"/>
-            <to uri="fabric:fabrictestendpoint"/>
-            <log message="${body}"/>
-        </route>
-    </camelContext>
-    
+  <bean id="fabric-camel" class="io.fabric8.camel.FabricComponent">
+      <property name="curator" ref="curator"/>
+  </bean>
+  
+<!--     <reference id="zkClient" interface="org.fusesource.fabric.zookeeper.IZKClient" />
+ -->
+<camelContext xmlns="http://camel.apache.org/schema/blueprint">
+  <propertyPlaceholder location="blueprint:myblueprint.placeholder" id="properties"/>
+  <route>
+    <from uri="timer://entry?fixedRate=true&amp;period=100"/>
+    <bean ref="genRandom" method="random"/>
+    <choice>
+<!--       <when>
+        <simple>${body} == '1'</simple>
+        <to uri="fabric:srv1"/>
+      </when> -->
+      <when>
+        <simple>${body} == '2'</simple>
+        <to uri="fabric:srv2"/>
+      </when>
+<!--       <when>
+        <simple>${body} == '3'</simple>
+        <to uri="fabric:srv3"/>
+      </when>
+      <when>
+        <simple>${body} == '4'</simple>
+        <to uri="fabric:srv4"/>
+      </when>
+      <when>
+        <simple>${body} == '5'</simple>
+        <to uri="fabric:srv5"/>
+      </when>
+      <when>
+        <simple>${body} == '6'</simple>
+        <to uri="fabric:srv6"/>
+      </when>
+      <when>
+        <simple>${body} == '7'</simple>
+        <to uri="fabric:srv7"/>
+      </when>
+      <when>
+        <simple>${body} == '8'</simple>
+        <to uri="fabric:srv8"/>
+      </when>
+      <when>
+        <simple>${body} == '9'</simple>
+        <to uri="fabric:srv9"/>
+      </when>
+      <when>
+        <simple>${body} == '10'</simple>
+        <to uri="fabric:srv10"/>
+      </when>
+      <when>
+        <simple>${body} == '11'</simple>
+        <to uri="fabric:srv11"/>
+      </when>
+      <when>
+        <simple>${body} == '12'</simple>
+        <to uri="fabric:srv12"/>
+      </when>
+      <when>
+        <simple>${body} == '13'</simple>
+        <to uri="fabric:srv13"/>
+      </when>
+      <when>
+        <simple>${body} == '14'</simple>
+        <to uri="fabric:srv14"/>
+      </when>
+      <when>
+        <simple>${body} == '15'</simple>
+        <to uri="fabric:srv15"/>
+      </when>
+      <when>
+        <simple>${body} == '16'</simple>
+        <to uri="fabric:srv16"/>
+      </when> -->
+    </choice>
+  </route>
+</camelContext>
 </blueprint>

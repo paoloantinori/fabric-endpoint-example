@@ -28,6 +28,12 @@
     <artifactId>fabric-endpoint-client</artifactId>
     <name>Fabric Endpoint Example: Client</name>
     <packaging>bundle</packaging>
+	<properties>
+		<fabric8.profile>camel-endpoint-client</fabric8.profile>
+		<fabric8.parentProfiles>karaf</fabric8.parentProfiles>
+		<fabric8.profileVersion>1.3</fabric8.profileVersion>
+		<fabric8.features>fabric-zookeeper fabric-camel</fabric8.features>
+	</properties>
     
     <dependencies>
         <dependency>
@@ -46,7 +52,11 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Import-Package>*</Import-Package>
+                      <Import-Package>
+                        
+                        io.fabric8.zookeeper,
+                        *
+                      </Import-Package>
                     </instructions>
                 </configuration>
             </plugin>

@@ -29,21 +29,22 @@
     <cm:property-placeholder id="myblueprint.placeholder" persistent-id="com.fusesource.examples.fabricendpoint.consumer">
         <!-- list some properties for this test -->
         <cm:default-properties>
-            <cm:property name="name" value="sd08f89sdv0"/>
-            <cm:property name="port" value="10001"/>
+            <cm:property name="name" value="consumer"/>
+            <cm:property name="port" value="10006"/>
         </cm:default-properties>
     </cm:property-placeholder>
+
 
   <reference id="curator" interface="org.apache.curator.framework.CuratorFramework"/>
 
   <bean id="fabric-camel" class="io.fabric8.camel.FabricComponent">
       <property name="curator" ref="curator"/>
   </bean>
-  
+
     <camelContext xmlns="http://camel.apache.org/schema/blueprint">
   <propertyPlaceholder location="blueprint:myblueprint.placeholder" id="properties"/>
   <route>
-    <from uri="fabric:srv1:jetty:http://0.0.0.0:{{port}}/fabric"/>
+    <from uri="fabric:srv6:jetty:http://0.0.0.0:{{port}}/fabric"/>
     <setBody>
       <simple>${properties:name} said: Goodmorning Client.</simple>
     </setBody>
