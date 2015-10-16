@@ -29,24 +29,31 @@
     <cm:property-placeholder id="myblueprint.placeholder" persistent-id="com.fusesource.examples.fabricendpoint.client">
         <!-- list some properties for this test -->
         <cm:default-properties>
-            <cm:property name="name" value="client"/>
+            <cm:property name="name" value="p324prfmdc"/>
         </cm:default-properties>
     </cm:property-placeholder>
 
+	<bean id="genRandom" class="org.mrobson.example.GenRandom"/>
 
-    <reference id="zkClient" interface="org.fusesource.fabric.zookeeper.IZKClient" />
 
-    <camelContext id="baseCamelContext" xmlns="http://camel.apache.org/schema/blueprint">
-    <propertyPlaceholder location="blueprint:myblueprint.placeholder" id="properties"/>
-        <route id="fabric-client">
-            <from uri="timer://foo"/>
-            <setBody>
-                <simple>${properties:name} said: Hello Cosumer!</simple>
-            </setBody>
-            <log message="${body}"/>
-            <to uri="fabric:fabrictestendpoint"/>
-            <log message="${body}"/>
-        </route>
-    </camelContext>
-    
+<!-- these Curator Services create problems and cannot be safely used -->
+<!--   <reference id="curator" interface="org.apache.curator.framework.CuratorFramework"/>
+
+  <bean id="fabric-camel" class="io.fabric8.camel.FabricComponent">
+      <property name="curator" ref="curator"/>
+  </bean> -->
+
+<camelContext xmlns="http://camel.apache.org/schema/blueprint">
+  <propertyPlaceholder location="blueprint:myblueprint.placeholder" id="properties"/>
+  <route>
+    <from uri="timer://entry?fixedRate=true&amp;period=5000"/>
+    <bean ref="genRandom" method="random"/>
+    <choice>
+      <when>
+        <simple>${body} == '2'</simple>
+        <to uri="fabric:srv"/>
+      </when>
+    </choice>
+  </route>
+</camelContext>
 </blueprint>
