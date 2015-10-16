@@ -28,24 +28,8 @@
     
     <modules>
         <module>fabric-endpoint-client</module>
-        <module>fabric-endpoint-features</module>
-<!--         <module>fabric-endpoint-consumer</module> -->
         <module>fabric-endpoint-consumer2</module>
-<!--         <module>fabric-endpoint-consumer2b</module>
-        <module>fabric-endpoint-consumer3</module>
-        <module>fabric-endpoint-consumer4</module>
-        <module>fabric-endpoint-consumer5</module>
-        <module>fabric-endpoint-consumer6</module>
-        <module>fabric-endpoint-consumer7</module>
-        <module>fabric-endpoint-consumer8</module>
-        <module>fabric-endpoint-consumer9</module>
-        <module>fabric-endpoint-consumer10</module>
-        <module>fabric-endpoint-consumer11</module>
-        <module>fabric-endpoint-consumer12</module>
-        <module>fabric-endpoint-consumer13</module>
-        <module>fabric-endpoint-consumer14</module>
-        <module>fabric-endpoint-consumer15</module>
-        <module>fabric-endpoint-consumer16</module> -->
+
     </modules>
 
     <properties>

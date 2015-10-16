@@ -24,12 +24,12 @@
       <cm:property name="port" value="10002"/>
     </cm:default-properties>
   </cm:property-placeholder>
-
+<!-- 
   <reference id="curator" interface="org.apache.curator.framework.CuratorFramework"/>
 
   <bean id="fabric-camel" class="io.fabric8.camel.FabricComponent">
       <property name="curator" ref="curator"/>
-  </bean>
+  </bean> -->
 
   
   <!--     <reference id="zkClient" interface="org.fusesource.fabric.zookeeper.IZKClient" />-->
