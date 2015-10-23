@@ -22,19 +22,30 @@
     <packaging>pom</packaging>
     <version>1.0</version>
     <name>Fabric Endpoint Example</name>
+
+
     <modules>
         <module>fabric-endpoint-client</module>
         <module>fabric-endpoint-consumer</module>
     </modules>
+
+
     <properties>
-        <fabric8.profile>fabricCamelExample</fabric8.profile>
-        <fabric8.profileVersion>1.1</fabric8.profileVersion>
+        <!-- the following 2 versions depend on the JBoss Fuse platform version you are deploying to -->
         <camel.version>2.15.1.redhat-620133</camel.version>
         <fuse.version>1.2.0.redhat-153</fuse.version>
+
+        <fabric8.profile>fabricCamelExample</fabric8.profile>
+        <!-- defines the defualt profile version, but you can override at Maven build/deploy time. See `deploy.sh` -->
+        <fabric8.profileVersion>1.1</fabric8.profileVersion>
+
+
         <maven-resources-plugin-version>2.5</maven-resources-plugin-version>
         <build-helper-plugin-version>1.7</build-helper-plugin-version>
         <fabric8-maven-plugin-version>1.2.0.Beta4</fabric8-maven-plugin-version>
     </properties>
+
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -54,6 +65,8 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+
     <build>
         <defaultGoal>install</defaultGoal>
         <pluginManagement>
@@ -72,6 +85,8 @@
             </plugins>
         </pluginManagement>
     </build>
+
+
     <repositories>
         <repository>
             <id>release.fusesource.org</id>
@@ -96,6 +111,8 @@
             </releases>
         </repository>
     </repositories>
+
+
     <pluginRepositories>
         <pluginRepository>
             <id>release.fusesource.org</id>
@@ -120,4 +137,6 @@
             </releases>
         </pluginRepository>
     </pluginRepositories>
+
+
 </project>

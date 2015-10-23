@@ -15,7 +15,16 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0" xmlns:camel="http://camel.apache.org/schema/blueprint" xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="             http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd             http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd             http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0 http://aries.apache.org/schemas/blueprint-cm/blueprint-cm-1.1.0.xsd            ">
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+           xmlns:camel="http://camel.apache.org/schema/blueprint"
+           xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="
+            http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+            http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd
+            http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0 http://aries.apache.org/schemas/blueprint-cm/blueprint-cm-1.1.0.xsd
+           ">
+
   <!-- OSGI blueprint property placeholder -->
   <cm:property-placeholder id="myblueprint.placeholder" persistent-id="com.fusesource.examples.fabricendpoint.consumer">
     <!-- list some properties for this test -->
@@ -25,18 +34,13 @@
     </cm:default-properties>
   </cm:property-placeholder>
 
-<!--   <reference id="curator" interface="org.apache.curator.framework.CuratorFramework"/>
+<!-- You don't need reference to CuratorFramework service here. They are auotmatically given to you by the platform, and actually when you define them you risk to miss Curator events due to Dynamic Proxies nature -->
 
-  <bean id="fabric-camel" class="io.fabric8.camel.FabricComponent">
-      <property name="curator" ref="curator"/>
-  </bean> -->
-
-  
-  <!--     <reference id="zkClient" interface="org.fusesource.fabric.zookeeper.IZKClient" />-->
   <camelContext xmlns="http://camel.apache.org/schema/blueprint">
     <propertyPlaceholder id="properties" location="blueprint:myblueprint.placeholder"/>
     <route>
-      <from uri="fabric:srv2:jetty:http://0.0.0.0:{{port}}/fabric"/>
+<!--       registers a fabric: endpoint, meaning that other routes deployed on the platform can access this consumer via its logical fabric: name that is `srv` instead of the physical one that is `jetty:...` -->
+      <from uri="fabric:srv:jetty:http://0.0.0.0:{{port}}/fabric"/>
       <setBody>
         <simple>${properties:name} said: Goodmorning Client.</simple>
       </setBody>

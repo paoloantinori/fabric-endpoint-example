@@ -36,12 +36,7 @@
 	<bean id="genRandom" class="org.mrobson.example.GenRandom"/>
 
 
-<!-- these Curator Services create problems and cannot be safely used -->
-<!--   <reference id="curator" interface="org.apache.curator.framework.CuratorFramework"/>
-
-  <bean id="fabric-camel" class="io.fabric8.camel.FabricComponent">
-      <property name="curator" ref="curator"/>
-  </bean> -->
+<!-- You don't need reference to CuratorFramework service here. They are auotmatically given to you by the platform, and actually when you define them you risk to miss Curator events due to Dynamic Proxies nature -->
 
 <camelContext xmlns="http://camel.apache.org/schema/blueprint">
   <propertyPlaceholder location="blueprint:myblueprint.placeholder" id="properties"/>
@@ -51,6 +46,7 @@
     <choice>
       <when>
         <simple>${body} == '2'</simple>
+        <!-- points to the "logical" endpoint `srv` -->
         <to uri="fabric:srv"/>
       </when>
     </choice>

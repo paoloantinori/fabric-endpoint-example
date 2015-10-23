@@ -25,11 +25,16 @@
   <artifactId>fabric-endpoint-client</artifactId>
   <name>Fabric Endpoint Example: Client</name>
   <packaging>bundle</packaging>
+
+
   <properties>
+    <!-- The following are properties used by fabric8-maven plugin. You probably need to modifle them if you want to modify the example with your custom code -->
     <fabric8.profile>camel-endpoint-client</fabric8.profile>
     <fabric8.parentProfiles>karaf</fabric8.parentProfiles>
     <fabric8.features>fabric-zookeeper fabric-camel</fabric8.features>
   </properties>
+
+
   <dependencies>
     <dependency>
       <groupId>org.apache.camel</groupId>
@@ -47,6 +52,8 @@
         <scope>provided</scope>
     </dependency>
   </dependencies>
+
+
   <build>
     <defaultGoal>install</defaultGoal>
     <plugins>
@@ -66,4 +73,6 @@
       </plugin>
     </plugins>
   </build>
+
+
 </project>
